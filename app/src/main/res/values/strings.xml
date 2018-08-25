@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">Book Store</string>
+
+    <!--dummy data-->
+    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+
+    <!-- Label for overflow menu option that deletes all book data in the app [CHAR LIMIT=20] -->
+    <string name="action_delete_all_entries">Delete All Pets</string>
+
+    <!-- Title for the activity to add a new book [CHAR LIMIT=20] -->
+    <string name="editor_activity_title_new_book">Add a Book</string>
+
+    <!-- Label for editor menu option to save book and leave editor [CHAR LIMIT=20] -->
+    <string name="action_save">Save</string>
+
+    <!-- Label for editor overflow menu option that deletes the current book [CHAR LIMIT=20] -->
+    <string name="action_delete">Delete</string>
+
+    <!-- Product Name -->
+    <string name="product_name_field">Product Name</string>
+
+    <!-- book hint -->
+    <string name="hint_product_name">Book</string>
+
+    <!-- Price -->
+    <string name="price_field">Price $</string>
+
+    <!-- price hint -->
+    <string name="hint_price">$</string>
+
+    <!-- Quantity -->
+    <string name="quantity_field">How many in stock</string>
+
+    <!-- quantity hint -->
+    <string name="hint_quantity">Quantity</string>
+
+    <!-- Supplier Name -->
+    <string name="supplier_name_field">Supplier Name</string>
+
+    <!-- supplier name hing -->
+    <string name="hint_supplier_name">Supplier</string>
+
+    <!-- Supplier Phone Number -->
+    <string name="supplier_phone_number_field">Supplier Phone Number</string>
+
+    <!-- phone number hint -->
+    <string name="hint_phone_number">555-555-5555</string>
+
+</resources>
