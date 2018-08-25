@@ -14,13 +14,13 @@ public final class BookContract {
         // unique ID number for each book (int)
         public final static String _ID = BaseColumns._ID;
 
-        // string contants for the columns
+        // string constants for the columns
         public static final String TABLE_NAME = "books";
         public static final String COLUMN_PRODUCT_NAME = "product name";
         public static final String COLUMN_PRICE = "price";
         public static final String COLUMN_QUANTITY = "quantity";
         public static final String COLUMN_SUPPLIER_NAME = "supplier name";
-        public static final String COLUMN_SUPPLIER_PHONE_NUMBER = "supplier phone number";
+        public static final String COLUMN_SUPPLIER_PHONE_NUMBER = "phone number";
 
     }
 

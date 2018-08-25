@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 String currentSupplierPhoneNumber = cursor.getString(supplierPhoneNumberIndex);
                 // display the values from each column of the current row in the
                 // cursor in the TextView
-                displayView.append(("/n" + currentID + " - " +
+                displayView.append(("\n" + currentID + " - " +
                         currentProductName + " - " +
                         currentPrice + " - " +
                         currentQuantity + " - " +
