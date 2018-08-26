@@ -16,11 +16,11 @@ public final class BookContract {
 
         // string constants for the columns
         public static final String TABLE_NAME = "books";
-        public static final String COLUMN_PRODUCT_NAME = "product name";
+        public static final String COLUMN_PRODUCT_NAME = "product";
         public static final String COLUMN_PRICE = "price";
         public static final String COLUMN_QUANTITY = "quantity";
-        public static final String COLUMN_SUPPLIER_NAME = "supplier name";
-        public static final String COLUMN_SUPPLIER_PHONE_NUMBER = "phone number";
+        public static final String COLUMN_SUPPLIER_NAME = "supplier";
+        public static final String COLUMN_SUPPLIER_PHONE_NUMBER = "phone";
 
     }
 

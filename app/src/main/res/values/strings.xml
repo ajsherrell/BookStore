@@ -44,6 +44,6 @@
     <string name="supplier_phone_number_field">Supplier Phone Number</string>
 
     <!-- phone number hint -->
-    <string name="hint_phone_number">555-555-5555</string>
+    <string name="hint_phone_number">555\-5555</string>
 
 </resources>

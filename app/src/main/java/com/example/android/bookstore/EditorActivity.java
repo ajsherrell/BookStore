@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.android.bookstore.data.BookContract;
+import com.example.android.bookstore.data.BookContract.BookEntry;
 import com.example.android.bookstore.data.BookDbHelper;
 
 /**
@@ -70,15 +71,15 @@ public class EditorActivity extends AppCompatActivity {
 
         // create a ContentValues object where column name are the keys,
         // and book attributes from the editor are the values.
-        ContentValues values= new ContentValues();
-        values.put(BookContract.BookEntry.COLUMN_PRODUCT_NAME, productName);
-        values.put(BookContract.BookEntry.COLUMN_PRICE, price);
-        values.put(BookContract.BookEntry.COLUMN_QUANTITY, quantity);
-        values.put(BookContract.BookEntry.COLUMN_SUPPLIER_NAME, supplierName);
-        values.put(BookContract.BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPhoneNumber);
+        ContentValues values = new ContentValues();
+        values.put(BookEntry.COLUMN_PRODUCT_NAME, productName);
+        values.put(BookEntry.COLUMN_PRICE, price);
+        values.put(BookEntry.COLUMN_QUANTITY, quantity);
+        values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierName);
+        values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPhoneNumber);
 
         // insert a new row for book in the database, return the ID of that new row
-        long newRowId = db.insert(BookContract.BookEntry.TABLE_NAME, null, values);
+        long newRowId = db.insert(BookEntry.TABLE_NAME, null, values);
 
         // show a toast message depending on whether or not the insertion was successful
         if (newRowId == -1) {

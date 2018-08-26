@@ -160,9 +160,9 @@ public class MainActivity extends AppCompatActivity {
         // set to "null", then the framework will not insert a row when there are no
         // values). The third argument is the ContentValues object containing the
         // info for The Giver.
-        long newRowId = db.insert(BookContract.BookEntry.TABLE_NAME, null, values);
+        long newRowId = db.insert(BookEntry.TABLE_NAME, null, values);
 
-        Log.i(TAG, "insertBook: New row ID: " + newRowId);
+        Log.e(TAG, "insertBook: New row ID: " + newRowId + " What is this error???????????????????");
     }
 
     @Override
