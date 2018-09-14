@@ -28,7 +28,7 @@ import com.example.android.bookstore.data.BookContract.BookEntry;
 public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    // log tag for debugging
+    // log tag for debugging only
     public static final String TAG = MainActivity.class.getSimpleName();
 
     // identifier for the book data loader
