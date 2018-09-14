@@ -10,6 +10,9 @@
     <!-- Title for the activity to add a new book [CHAR LIMIT=20] -->
     <string name="editor_activity_title_new_book">Add a Book</string>
 
+    <!-- Title for the activity to edit a book [CHAR LIMIT=20] -->
+    <string name="editor_activity_title_edit_book">Edit Book</string>
+
     <!-- Label for editor menu option to save book and leave editor [CHAR LIMIT=20] -->
     <string name="action_save">Save</string>
 
@@ -44,6 +47,69 @@
     <string name="supplier_phone_number_field">Supplier Phone Number</string>
 
     <!-- phone number hint -->
-    <string name="hint_phone_number">555\-5555</string>
+    <string name="hint_phone_number">555\-555\-5555</string>
+
+    <!-- Unknown Price -->
+    <string name="unknown_price">Unknown Price</string>
+
+    <!-- Dollar sign for list -->
+    <string name="dollar_sign">Price $</string>
+
+    <!-- quantity for list item -->
+    <string name="quantity"> Quantity: </string>
+
+    <!--text for sale button-->
+    <string name="sale_text">Sale</string>
+
+    <!-- text for empty view title -->
+    <string name="empty_view_title_text">It\'s a bit lonely here...</string>
+
+    <!-- text for empty view subtitle -->
+    <string name="empty_view_subtitle_text">Get started by adding a book</string>
+
+    <!--initial quantity value for button-->
+    <string name="initial_quantity_value">0</string>
+
+    <!--decrement sign-->
+    <string name="decrement">-</string>
+
+    <!--increment sign-->
+    <string name="increment">+</string>
+
+    <!--Toast message for saving book error-->
+    <string name="editor_insert_book_failed">Error with saving book</string>
+
+    <!--Toast message for saving book success-->
+    <string name="editor_insert_book_successful">Book saved</string>
+
+    <!--Toast message for updating book error-->
+    <string name="editor_update_book_failed">Error with updating book</string>
+
+    <!--Toast message for updating book success-->
+    <string name="editor_update_book_successful">Book updated</string>
+
+    <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+
+    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
+    <string name="discard">Discard</string>
+
+    <!-- Dialog button text for the option to keep editing the current pet [CHAR LIMIT=20] -->
+    <string name="keep_editing">Keep Editing</string>
+
+    <!-- Toast message in editor when current pet was successfully deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_book_successful">Book deleted</string>
+
+    <!-- Toast message in editor when current pet has failed to be deleted [CHAR LIMIT=NONE] -->
+    <string name="editor_delete_book_failed">Error with deleting book</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current pet [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Delete this book?</string>
+
+    <!-- Dialog button text for the option to confirm deleting the current pet [CHAR LIMIT=20] -->
+    <string name="delete">Delete</string>
+
+    <!-- Dialog button text for the option to cancel deletion of the current pet [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
 
 </resources>
