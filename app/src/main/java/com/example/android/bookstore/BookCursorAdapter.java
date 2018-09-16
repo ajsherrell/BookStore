@@ -16,8 +16,11 @@ import com.example.android.bookstore.data.BookContract.BookEntry;
 // {@link Cursor} of book data as its data source. This adapter knows how to create
 // list items for each row of book data in the {@link Cursor}.
 public class BookCursorAdapter extends CursorAdapter {
-    // global variable for sale button
-    private int bookQuantity;
+    // get context
+    private Context mContext;
+
+    // global variable for sale button. default is 1
+    private int bookQuantity = 1;
 
     /**
      * {@link  BookCursorAdapter} is an adapter for a list or grid view
@@ -26,6 +29,7 @@ public class BookCursorAdapter extends CursorAdapter {
      */
     public BookCursorAdapter(Context context, Cursor c) {
         super(context, c, 0);
+        this.mContext = context;
     }
 
     /**
@@ -58,7 +62,7 @@ public class BookCursorAdapter extends CursorAdapter {
         TextView titleTextView = (TextView) view.findViewById(R.id.title_view);
         TextView priceTextView = (TextView) view.findViewById(R.id.price_view);
         final TextView quantityTextView = (TextView) view.findViewById(R.id.quantity_view);
-        Button saleButton = (Button) view.findViewById(R.id.sale_button);
+        final Button saleButton = (Button) view.findViewById(R.id.sale_button);
 
         // find the columns of book attributes that we are interested in
         // product name, price, and quantity. plus a sale button that
@@ -82,8 +86,12 @@ public class BookCursorAdapter extends CursorAdapter {
         saleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bookQuantity--;
-                quantityTextView.setText(String.valueOf(R.string.quantity + bookQuantity));
+                if (bookQuantity == 0) {
+                    saleButton.setEnabled(false);
+                } else {
+                    bookQuantity--;
+                    quantityTextView.setText(String.valueOf(R.string.quantity + bookQuantity));
+                }
             }
         });
 

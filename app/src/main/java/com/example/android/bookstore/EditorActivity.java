@@ -1,15 +1,19 @@
 package com.example.android.bookstore;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +65,9 @@ public class EditorActivity extends AppCompatActivity implements
     // or not (false)
     private boolean mBookHasChanged = false;
 
+    // order button for making a phone call to order from supplier
+    private Button orderButton;
+
     /**
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
      * the view, and we change the mBookHasChanged boolean to true.
@@ -72,6 +79,8 @@ public class EditorActivity extends AppCompatActivity implements
             return false;
         }
     };
+
+    private static final int PHONE_CALL = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +127,7 @@ public class EditorActivity extends AppCompatActivity implements
 
         // bind the button views
         final TextView quantityValue = (TextView) findViewById(R.id.edit_quantity);
-        Button decrementButton = (Button) findViewById(R.id.decrement_quantity);
+        final Button decrementButton = (Button) findViewById(R.id.decrement_quantity);
         Button incrementButton = (Button) findViewById(R.id.increment_quantity);
 
         // onClick for increment button
@@ -134,8 +143,41 @@ public class EditorActivity extends AppCompatActivity implements
         decrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                count--;
-                quantityValue.setText(String.valueOf(count));
+                if (count == 0) {
+                    decrementButton.setEnabled(false);
+                } else {
+                    count--;
+                    quantityValue.setText(String.valueOf(count));
+                }
+            }
+        });
+
+        // bind button to order button view
+        orderButton = (Button) findViewById(R.id.order);
+
+        // click listener to make a call to order more inventory from the supplier
+        // used code from "https://www.tutorialspoint.com/android/android_phone_calls.htm"
+        orderButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                if (ActivityCompat.checkSelfPermission(EditorActivity.this,
+                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+                    ActivityCompat.requestPermissions(
+                            EditorActivity.this,
+                            new String[] { Manifest.permission.CALL_PHONE },
+                            PHONE_CALL
+                    );
+                    return;
+                }
+
+                // get phone number
+                String phoneNumber = mSupplierPhoneNumber.getText().toString().trim();
+
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + phoneNumber));
+
+                getApplicationContext().startActivity(callIntent);
             }
         });
 
