@@ -57,7 +57,7 @@ public class EditorActivity extends AppCompatActivity {
         // use trim to eliminate leading or trailing white space
         String productName = mProductName.getText().toString().trim();
         String priceString = mPrice.getText().toString().trim();
-        int price = Integer.parseInt(priceString); // into string
+        float price = Float.parseFloat(priceString); // into string
         String quantityString = mQuantity.getText().toString().trim();
         int quantity = Integer.parseInt(quantityString);
         String supplierName = mSupplierName.getText().toString().trim();
