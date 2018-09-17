@@ -15,4 +15,7 @@
 
     <!-- Common margin value used throughout the app -->
     <dimen name="activity_margin">16dp</dimen>
+
+    <!-- Button width -->
+    <dimen name="button_width">48dp</dimen>
 </resources>

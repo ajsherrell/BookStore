@@ -1,7 +1,6 @@
 package com.example.android.bookstore;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
@@ -12,12 +11,12 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -37,6 +36,9 @@ import com.example.android.bookstore.data.BookContract.BookEntry;
 public class EditorActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
+    // log tag
+    public static final String TAG = EditorActivity.class.getSimpleName();
+
     // identifier for the book data loader
     private static final int EXISTING_BOOK_LOADER = 0;
 
@@ -50,7 +52,7 @@ public class EditorActivity extends AppCompatActivity implements
     private EditText mPrice;
 
     // EditText to enter book quantity
-    private EditText mQuantity;
+    private TextView mQuantity;
 
     // EditText for supplier name
     private EditText mSupplierName;
@@ -79,6 +81,7 @@ public class EditorActivity extends AppCompatActivity implements
             return false;
         }
     };
+
 
     private static final int PHONE_CALL = 1;
 
@@ -113,6 +116,7 @@ public class EditorActivity extends AppCompatActivity implements
         // find all relevant views that we will read user input from
         mProductName = (EditText) findViewById(R.id.edit_product_name);
         mPrice = (EditText) findViewById(R.id.edit_price);
+        mQuantity = (TextView) findViewById(R.id.edit_quantity);
         mSupplierName = (EditText) findViewById(R.id.edit_supplier_name);
         mSupplierPhoneNumber = (EditText) findViewById(R.id.edit_supplier_phone_number);
 
@@ -125,8 +129,9 @@ public class EditorActivity extends AppCompatActivity implements
         mSupplierName.setOnTouchListener(mTouchListener);
         mSupplierPhoneNumber.setOnTouchListener(mTouchListener);
 
+        Log.i(TAG, "Something went wrong after mTouchListeners!!!!!!!!");
+
         // bind the button views
-        final TextView quantityValue = (TextView) findViewById(R.id.edit_quantity);
         final Button decrementButton = (Button) findViewById(R.id.decrement_quantity);
         Button incrementButton = (Button) findViewById(R.id.increment_quantity);
 
@@ -135,7 +140,7 @@ public class EditorActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 count++;
-                quantityValue.setText(String.valueOf(count));
+                mQuantity.setText(String.valueOf(count));
             }
         });
 
@@ -147,7 +152,7 @@ public class EditorActivity extends AppCompatActivity implements
                     decrementButton.setEnabled(false);
                 } else {
                     count--;
-                    quantityValue.setText(String.valueOf(count));
+                    mQuantity.setText(String.valueOf(count));
                 }
             }
         });
@@ -257,6 +262,8 @@ public class EditorActivity extends AppCompatActivity implements
                         Toast.LENGTH_SHORT).show();
             }
         }
+
+        Log.i(TAG, "Something went wrong in saveBook()!!!!!!!!");
     }
 
     @Override

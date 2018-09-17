@@ -3,6 +3,9 @@ package com.example.android.bookstore.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.example.android.bookstore.data.BookContract.BookEntry;
 
 public class BookDbHelper extends SQLiteOpenHelper {
 
@@ -30,16 +33,18 @@ public class BookDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // create a String that contains SQL statement to create the books table
-        String SQL_CREATE_BOOKS_TABLE = "CREATE TABLE " + BookContract.BookEntry.TABLE_NAME + " ("
-                + BookContract.BookEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + BookContract.BookEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
-                + BookContract.BookEntry.COLUMN_PRICE + " INTEGER, "
-                + BookContract.BookEntry.COLUMN_QUANTITY + " INTERGER NOT NULL DEFAULT 0, "
-                + BookContract.BookEntry.COLUMN_SUPPLIER_NAME + " TEXT, "
-                + BookContract.BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER + " TEXT);";
+        String SQL_CREATE_BOOKS_TABLE = "CREATE TABLE " + BookEntry.TABLE_NAME + " ("
+                + BookEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + BookEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
+                + BookEntry.COLUMN_PRICE + " INTEGER, "
+                + BookEntry.COLUMN_QUANTITY + " INTERGER NOT NULL DEFAULT 0, "
+                + BookEntry.COLUMN_SUPPLIER_NAME + " TEXT NOT NULL, "
+                + BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER + " TEXT NOT NULL);";
 
         // execute the SQL statement
         db.execSQL(SQL_CREATE_BOOKS_TABLE);
+
+        Log.v(TAG, "onCreate: this happened!!!!!!!!" );
     }
 
     // this is called when the database needs to be upgraded.

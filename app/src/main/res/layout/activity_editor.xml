@@ -102,27 +102,22 @@
 
             <!-- decrement button -->
             <Button
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
                 android:id="@+id/decrement_quantity"
                 android:text="@string/decrement"
-                style="@style/Widget.AppCompat.Button" />
+                style="@style/buttonStyle" />
 
             <!-- quantity text view -->
             <TextView android:id="@+id/edit_quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/initial_quantity_value"
+                android:layout_marginLeft="48dp"
                 style="@style/CategoryStyle"/>
 
             <!-- increment button -->
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/increment_quantity"
                 android:text="@string/increment"
-                style="@style/Widget.AppCompat.Button"/>
+                style="@style/buttonStyle"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -182,16 +177,10 @@
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <Button android:id="@+id/order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
                 android:text="@string/order_button"/>
 
         </LinearLayout>
