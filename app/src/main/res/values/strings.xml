@@ -115,4 +115,18 @@
     <!--order more books from supplier using phone number intent-->
     <string name="order_button">Order</string>
 
+    <!--error checks-->
+
+    <!--product name check-->
+    <string name="product_name_check">Please enter a product name</string>
+
+    <!--price check-->
+    <string name="price_check">Please enter a price</string>
+
+    <!-- quantity check -->
+    <string name="quantity_check">Please enter a quantity</string>
+
+    <!--phone number check-->
+    <string name="phone_number_check">Please enter the phone a valid phone number</string>
+
 </resources>

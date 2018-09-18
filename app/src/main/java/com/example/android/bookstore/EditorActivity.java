@@ -196,7 +196,6 @@ public class EditorActivity extends AppCompatActivity implements
         // use trim to eliminate leading or trailing white space
         String productName = mProductName.getText().toString().trim();
         String priceString = mPrice.getText().toString().trim();
-        int price = Integer.parseInt(priceString); // into string
         String quantityString = mQuantity.getText().toString().trim();
         String supplierName = mSupplierName.getText().toString().trim();
         String supplierPhoneNumber = mSupplierPhoneNumber.getText().toString().trim();
@@ -206,6 +205,35 @@ public class EditorActivity extends AppCompatActivity implements
         if (mCurrentBookUri == null && TextUtils.isEmpty(productName) &&
                 TextUtils.isEmpty(priceString) && TextUtils.isEmpty(quantityString) &&
                 TextUtils.isEmpty(supplierName) && TextUtils.isEmpty(supplierPhoneNumber)) {
+
+            // check if product name is missing
+            if (TextUtils.isEmpty(productName)) {
+                Toast.makeText(this, R.string.product_name_check,
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            // check if price is missing
+            if (TextUtils.isEmpty(priceString)) {
+                Toast.makeText(this, R.string.price_check,
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            // check if quantity is missing
+            if (TextUtils.isEmpty(quantityString)) {
+                Toast.makeText(this, R.string.quantity_check,
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            // supplier can be null
+            if (TextUtils.isEmpty(supplierName)) {
+                return;
+            }
+
+            // check if phone number is missing
+            if (TextUtils.isEmpty(supplierPhoneNumber)) {
+                Toast.makeText(this, R.string.phone_number_check,
+                        Toast.LENGTH_SHORT).show();
+            }
             // since no fields were modified, we can return early without creating a new books
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
@@ -215,7 +243,7 @@ public class EditorActivity extends AppCompatActivity implements
         // and book attributes from the editor are the values.
         ContentValues values = new ContentValues();
         values.put(BookEntry.COLUMN_PRODUCT_NAME, productName);
-        values.put(BookEntry.COLUMN_PRICE, price);
+        values.put(BookEntry.COLUMN_PRICE, priceString);
         values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierName);
         values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPhoneNumber);
 
@@ -224,6 +252,7 @@ public class EditorActivity extends AppCompatActivity implements
         int quantity = 0;
         if (!TextUtils.isEmpty(quantityString)) {
             quantity = Integer.parseInt(quantityString);
+            Log.i(TAG, "saveBook: what is this error??? " + quantity);
         }
         values.put(BookEntry.COLUMN_QUANTITY, quantity);
 
@@ -400,14 +429,14 @@ public class EditorActivity extends AppCompatActivity implements
 
             // read the book attributes from the Cursor for the current book
             String productName = cursor.getString(titleColumnIndex);
-            int bookPrice = cursor.getInt(priceColumnIndex);
+            String bookPrice = cursor.getString(priceColumnIndex);
             int bookQuantity = cursor.getInt(quantityColumnIndex);
             String supplierName = cursor.getString(supplierNameColumnIndex);
             String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
 
             // update the views on the screen with the values from the database
             mProductName.setText(productName);
-            mPrice.setText(Integer.toString(bookPrice));
+            mPrice.setText(bookPrice);
             mQuantity.setText(Integer.toString(bookQuantity));
             mSupplierName.setText(supplierName);
             mSupplierPhoneNumber.setText(supplierPhone);

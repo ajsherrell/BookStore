@@ -3,6 +3,7 @@ package com.example.android.bookstore;
 import android.content.Context;
 import android.database.Cursor;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,10 @@ import com.example.android.bookstore.data.BookContract.BookEntry;
 // {@link Cursor} of book data as its data source. This adapter knows how to create
 // list items for each row of book data in the {@link Cursor}.
 public class BookCursorAdapter extends CursorAdapter {
+
+    // log tab
+    public static final String TAG = BookCursorAdapter.class.getSimpleName();
+
     // get context
     private Context mContext;
 
@@ -90,10 +95,14 @@ public class BookCursorAdapter extends CursorAdapter {
                     saleButton.setEnabled(false);
                 } else {
                     bookQuantity--;
-                    quantityTextView.setText(String.valueOf(R.string.quantity + bookQuantity));
+                    quantityTextView.setText(String.valueOf(bookQuantity));
                 }
+
+                Log.i(TAG, "onClick: what is this error???? " + bookQuantity);
             }
         });
+
+        Log.i(TAG, "bindView: what is this error????? " + bookQuantity);
 
         // update the TextViews and button view with the attributes for the current book.
         titleTextView.setText(productName);

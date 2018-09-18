@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements
 
                 // launch the {@link EditorActivity} to display the data for the current book.
                 startActivity(intent);
+                Log.i(TAG, "onItemClick: why" + currentBookUri);
             }
         });
 

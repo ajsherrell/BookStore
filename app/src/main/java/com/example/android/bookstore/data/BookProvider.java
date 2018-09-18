@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static com.example.android.bookstore.data.BookContract.*;
 
 public class BookProvider extends ContentProvider {
@@ -132,8 +135,8 @@ public class BookProvider extends ContentProvider {
         }
 
         // check that price is greater than zero
-        Integer price = values.getAsInteger(BookEntry.COLUMN_PRICE);
-        if (price < 0) {
+        String price = values.getAsString(BookEntry.COLUMN_PRICE);
+        if (price == null) {
             throw new IllegalArgumentException("Book requires valid price");
         }
 
@@ -149,8 +152,11 @@ public class BookProvider extends ContentProvider {
         String phone = values.getAsString(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER);
         //matches numbers and dashes, any order really.
         String regexStr = "^[0-9\\-]*$";
-        if (phone != regexStr) {
-            throw new IllegalArgumentException("Book required valid phone number");
+        Pattern pattern = Pattern.compile(regexStr);
+        Matcher matcher = pattern.matcher(phone);
+        boolean isPhoneFormat = matcher.matches();
+        if (!isPhoneFormat) {
+            throw new IllegalArgumentException("Book requires valid phone number");
         }
 
         // get writable database
@@ -211,8 +217,8 @@ public class BookProvider extends ContentProvider {
         // if the {@link BookEntry#COLUMN_PRICE} key is present,
         // check that the price value is valid
         if (values.containsKey(BookEntry.COLUMN_PRICE)) {
-            Integer price = values.getAsInteger(BookEntry.COLUMN_PRICE);
-            if (price < 0) {
+            String price = values.getAsString(BookEntry.COLUMN_PRICE);
+            if (price == null) {
                 throw new IllegalArgumentException("Book required valid price");
             }
         }
@@ -234,7 +240,10 @@ public class BookProvider extends ContentProvider {
             String phone = values.getAsString(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER);
             //matches numbers and dashes, any order really.
             String regexStr = "^[0-9\\-]*$";
-            if (phone != regexStr) {
+            Pattern pattern = Pattern.compile(regexStr);
+            Matcher matcher = pattern.matcher(phone);
+            boolean isPhoneFormat = matcher.matches();
+            if (!isPhoneFormat) {
                 throw new IllegalArgumentException("Book requires valid phone number");
             }
         }
