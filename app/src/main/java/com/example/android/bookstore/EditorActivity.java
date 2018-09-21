@@ -61,7 +61,7 @@ public class EditorActivity extends AppCompatActivity implements
     private EditText mSupplierPhoneNumber;
 
     // counter for quantity buttons
-    int count = 0;
+    int count;
 
     // boolean flag that keeps track of whether the book has been edited (true
     // or not (false)
@@ -139,8 +139,11 @@ public class EditorActivity extends AppCompatActivity implements
         incrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                count++;
+                String quantityString = mQuantity.getText().toString();
+                int count = Integer.parseInt(quantityString);
+                count+=1;
                 mQuantity.setText(String.valueOf(count));
+
             }
         });
 
@@ -152,7 +155,6 @@ public class EditorActivity extends AppCompatActivity implements
                 int count = Integer.parseInt(quantityString);
                 count-=1;
                 if (count <= 0) {
-                    count = 0;
                     decrementButton.setEnabled(false);
                 } else {
                     mQuantity.setText(String.valueOf(count));
@@ -185,7 +187,7 @@ public class EditorActivity extends AppCompatActivity implements
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:" + phoneNumber));
 
-                getApplicationContext().startActivity(callIntent);
+                startActivity(callIntent);
             }
         });
 
@@ -215,7 +217,7 @@ public class EditorActivity extends AppCompatActivity implements
                 return;
             }
 
-            if (TextUtils.isEmpty(quantityString)) {
+            if (Integer.parseInt(quantityString) <= 0) {
                 Toast.makeText(this, R.string.quantity_check, Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -235,9 +237,14 @@ public class EditorActivity extends AppCompatActivity implements
             ContentValues values = new ContentValues();
             values.put(BookEntry.COLUMN_PRODUCT_NAME, productName);
             values.put(BookEntry.COLUMN_PRICE, priceString);
-            values.put(BookEntry.COLUMN_QUANTITY, quantityString);
             values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierName);
             values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPhoneNumber);
+
+            // check if the quantity is already filled in
+            if (!(Integer.parseInt(quantityString) <= 0)) {
+                values.put(BookEntry.COLUMN_QUANTITY, quantityString);
+            }
+
 
             Uri newUri = getContentResolver().insert(BookEntry.CONTENT_URI, values);
 
@@ -268,7 +275,7 @@ public class EditorActivity extends AppCompatActivity implements
                 return;
             }
 
-            if (TextUtils.isEmpty(quantityString)) {
+            if (Integer.parseInt(quantityString) <= 0) {
                 Toast.makeText(this, R.string.quantity_check, Toast.LENGTH_SHORT).show();
                 return;
             }

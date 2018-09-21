@@ -1,5 +1,6 @@
 package com.example.android.bookstore;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.text.TextUtils;
@@ -24,8 +25,8 @@ public class BookCursorAdapter extends CursorAdapter {
     // get context
     private Context mContext;
 
-    // global variable for sale button. default is 1
-    private int bookQuantity = 1;
+    // global variable for sale button
+    private int bookQuantity;
 
     /**
      * {@link  BookCursorAdapter} is an adapter for a list or grid view
@@ -62,7 +63,7 @@ public class BookCursorAdapter extends CursorAdapter {
      *                correct row.
      */
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public void bindView(View view, final Context context, Cursor cursor) {
         // find fields to populate in the list item layout
         TextView titleTextView = (TextView) view.findViewById(R.id.title_view);
         TextView priceTextView = (TextView) view.findViewById(R.id.price_view);
@@ -97,7 +98,9 @@ public class BookCursorAdapter extends CursorAdapter {
                     bookQuantity--;
                     quantityTextView.setText(String.valueOf(bookQuantity));
                 }
-
+                ContentValues values = new ContentValues();
+                values.put(BookEntry.COLUMN_QUANTITY, bookQuantity);
+                mContext.getContentResolver().update(BookEntry.CONTENT_URI, values, null, null);
                 Log.i(TAG, "onClick: what is this error???? " + bookQuantity);
             }
         });

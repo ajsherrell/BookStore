@@ -33,9 +33,6 @@ public final class BookContract {
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
                 + "/" + CONTENT_AUTHORITY + "/" + PATH_BOOKS;
 
-        // unique ID number for each book (int)
-        public final static String _ID = BaseColumns._ID;
-
         // string constants for the columns
         public static final String TABLE_NAME = "books";
         public static final String COLUMN_PRODUCT_NAME = "product";

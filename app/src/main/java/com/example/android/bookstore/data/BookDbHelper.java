@@ -51,6 +51,14 @@ public class BookDbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // the database is still version 1, so nothing to be done here
+        // used code from: https://thebhwgroup.com/blog/how-android-sqlite-onupgrade
+        // when new version is ready:
+        if (oldVersion < 2) {
+            // db.execSQL(DATABASE_ALTER_1);
+        }
+        if (oldVersion < 3) {
+            // db.execSQL(DATABASE_ALTER_2);
+        }
     }
 
 }
