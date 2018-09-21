@@ -126,7 +126,13 @@
     <!-- quantity check -->
     <string name="quantity_check">Please enter a quantity</string>
 
+    <!--supplier name check-->
+    <string name="supplier_name_check">Please enter supplier name</string>
+
     <!--phone number check-->
     <string name="phone_number_check">Please enter the phone a valid phone number</string>
+
+    <!--Book not saved because no items were entered-->
+    <string name="no_book_saved">No items were entered. Book was not saved.</string>
 
 </resources>

@@ -148,10 +148,13 @@ public class EditorActivity extends AppCompatActivity implements
         decrementButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (count == 0) {
+                String quantityString = mQuantity.getText().toString();
+                int count = Integer.parseInt(quantityString);
+                count-=1;
+                if (count <= 0) {
+                    count = 0;
                     decrementButton.setEnabled(false);
                 } else {
-                    count--;
                     mQuantity.setText(String.valueOf(count));
                 }
             }
@@ -200,67 +203,42 @@ public class EditorActivity extends AppCompatActivity implements
         String supplierName = mSupplierName.getText().toString().trim();
         String supplierPhoneNumber = mSupplierPhoneNumber.getText().toString().trim();
 
-       // check if this is supposed to be a new book and check if all the fields in the
-        // editor are blank
-        if (mCurrentBookUri == null && TextUtils.isEmpty(productName) &&
-                TextUtils.isEmpty(priceString) && TextUtils.isEmpty(quantityString) &&
-                TextUtils.isEmpty(supplierName) && TextUtils.isEmpty(supplierPhoneNumber)) {
-
-            // check if product name is missing
+       // check if this is supposed to be a new book and if all fields are blank
+        if (mCurrentBookUri == null) {
             if (TextUtils.isEmpty(productName)) {
-                Toast.makeText(this, R.string.product_name_check,
-                        Toast.LENGTH_SHORT).show();
-            }
-
-            // check if price is missing
-            if (TextUtils.isEmpty(priceString)) {
-                Toast.makeText(this, R.string.price_check,
-                        Toast.LENGTH_SHORT).show();
-            }
-
-            // check if quantity is missing
-            if (TextUtils.isEmpty(quantityString)) {
-                Toast.makeText(this, R.string.quantity_check,
-                        Toast.LENGTH_SHORT).show();
-            }
-
-            // supplier can be null
-            if (TextUtils.isEmpty(supplierName)) {
+                Toast.makeText(this, R.string.product_name_check, Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // check if phone number is missing
-            if (TextUtils.isEmpty(supplierPhoneNumber)) {
-                Toast.makeText(this, R.string.phone_number_check,
-                        Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(priceString)) {
+                Toast.makeText(this, R.string.price_check, Toast.LENGTH_SHORT).show();
+                return;
             }
-            // since no fields were modified, we can return early without creating a new books
-            // No need to create ContentValues and no need to do any ContentProvider operations.
-            return;
-        }
 
-        // create a ContentValues object where column name are the keys,
-        // and book attributes from the editor are the values.
-        ContentValues values = new ContentValues();
-        values.put(BookEntry.COLUMN_PRODUCT_NAME, productName);
-        values.put(BookEntry.COLUMN_PRICE, priceString);
-        values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierName);
-        values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPhoneNumber);
+            if (TextUtils.isEmpty(quantityString)) {
+                Toast.makeText(this, R.string.quantity_check, Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-        // if the quantity is not provided by the user, don't try to parse the string into
-        // an integer value. Use 0 by default.
-        int quantity = 0;
-        if (!TextUtils.isEmpty(quantityString)) {
-            quantity = Integer.parseInt(quantityString);
-            Log.i(TAG, "saveBook: what is this error??? " + quantity);
-        }
-        values.put(BookEntry.COLUMN_QUANTITY, quantity);
+            if (TextUtils.isEmpty(supplierName)) {
+                Toast.makeText(this, R.string.supplier_name_check, Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-        // determine if this is a new or existing book by checking if mCurrentBookUri
-        // is null or not
-        if (mCurrentBookUri == null) {
-            // this is a NEW book, so insert a new book into the provider,
-            // returning the content URI for the new book.
+            if (TextUtils.isEmpty(supplierPhoneNumber)) {
+                Toast.makeText(this, R.string.phone_number_check, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // create a ContentValues object where column name are the keys,
+            // and book attributes from the editor are the values.
+            ContentValues values = new ContentValues();
+            values.put(BookEntry.COLUMN_PRODUCT_NAME, productName);
+            values.put(BookEntry.COLUMN_PRICE, priceString);
+            values.put(BookEntry.COLUMN_QUANTITY, quantityString);
+            values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierName);
+            values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPhoneNumber);
+
             Uri newUri = getContentResolver().insert(BookEntry.CONTENT_URI, values);
 
             // show a toast message depending on whether or not the insertion was successful.
@@ -272,12 +250,49 @@ public class EditorActivity extends AppCompatActivity implements
                 // otherwise, the insertion was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.editor_insert_book_successful),
                         Toast.LENGTH_SHORT).show();
+                finish();
             }
+
         } else {
             // Otherwise this is an EXISTING book, so update the book with content URI: mCurrentBookUri
             // and pass in the new ContentValues. Pass in null for the selection and selection args
             // because mCurrentBookUri will already identify the correct row in the database that
             // we want to modify.
+            if (TextUtils.isEmpty(productName)) {
+                Toast.makeText(this, R.string.product_name_check, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (TextUtils.isEmpty(priceString)) {
+                Toast.makeText(this, R.string.price_check, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (TextUtils.isEmpty(quantityString)) {
+                Toast.makeText(this, R.string.quantity_check, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (TextUtils.isEmpty(supplierName)) {
+                Toast.makeText(this, R.string.supplier_name_check, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (TextUtils.isEmpty(supplierPhoneNumber)) {
+                Toast.makeText(this, R.string.phone_number_check, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // create a ContentValues object where column name are the keys,
+            // and book attributes from the editor are the values.
+            ContentValues values = new ContentValues();
+            values.put(BookEntry.COLUMN_PRODUCT_NAME, productName);
+            values.put(BookEntry.COLUMN_PRICE, priceString);
+            values.put(BookEntry.COLUMN_QUANTITY, quantityString);
+            values.put(BookEntry.COLUMN_SUPPLIER_NAME, supplierName);
+            values.put(BookEntry.COLUMN_SUPPLIER_PHONE_NUMBER, supplierPhoneNumber);
+
+
             int rowsAffected = getContentResolver().update(mCurrentBookUri, values, null, null);
 
             // show a toast message depending on whether or not the update was successful.
@@ -289,6 +304,7 @@ public class EditorActivity extends AppCompatActivity implements
                 // otherwise, the update was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.editor_update_book_successful),
                         Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
 
@@ -326,8 +342,6 @@ public class EditorActivity extends AppCompatActivity implements
             case R.id.action_save:
                 // save book to database
                 saveBook();
-                // exit activity
-                finish();
                 return true;
             // respond to a click on the "delete" menu option
             case R.id.action_delete:
@@ -437,7 +451,7 @@ public class EditorActivity extends AppCompatActivity implements
             // update the views on the screen with the values from the database
             mProductName.setText(productName);
             mPrice.setText(bookPrice);
-            mQuantity.setText(Integer.toString(bookQuantity));
+            mQuantity.setText(Integer.toString(count));
             mSupplierName.setText(supplierName);
             mSupplierPhoneNumber.setText(supplierPhone);
         }
@@ -448,7 +462,7 @@ public class EditorActivity extends AppCompatActivity implements
         // if the loader is invalidated, clear out all the data from the input fields.
         mProductName.setText("");
         mPrice.setText("");
-        mQuantity.setText(0);
+        mQuantity.setText("0");
         mSupplierName.setText("");
         mSupplierPhoneNumber.setText("");
     }
