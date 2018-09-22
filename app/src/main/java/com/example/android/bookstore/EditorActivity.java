@@ -458,7 +458,7 @@ public class EditorActivity extends AppCompatActivity implements
             // update the views on the screen with the values from the database
             mProductName.setText(productName);
             mPrice.setText(bookPrice);
-            mQuantity.setText(Integer.toString(count));
+            mQuantity.setText(Integer.toString(bookQuantity));
             mSupplierName.setText(supplierName);
             mSupplierPhoneNumber.setText(supplierPhone);
         }
